@@ -14,14 +14,63 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-<navigation
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@+id/home">
+    app:startDestination="@+id/titleScreen">
 
-    <include app:graph="@navigation/home"/>
-    <include app:graph="@navigation/list"/>
-    <include app:graph="@navigation/form"/>
 
+    <fragment
+        android:id="@+id/titleScreen"
+        android:name="com.example.android.navigationadvancedsample.homescreen.Title"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_title">
+        <action
+            android:id="@+id/action_title_to_about"
+            app:destination="@id/aboutScreen"/>
+    </fragment>
+    <fragment
+        android:id="@+id/aboutScreen"
+        android:name="com.example.android.navigationadvancedsample.homescreen.About"
+        android:label="@string/title_about"
+        tools:layout="@layout/fragment_about"/>
+
+    <fragment
+        android:id="@+id/leaderboard"
+        android:name="com.example.android.navigationadvancedsample.listscreen.Leaderboard"
+        android:label="@string/title_list"
+        tools:layout="@layout/fragment_leaderboard">
+        <action
+            android:id="@+id/action_leaderboard_to_userProfile"
+            app:destination="@id/userProfile"/>
+    </fragment>
+    <fragment
+        android:id="@+id/userProfile"
+        android:name="com.example.android.navigationadvancedsample.listscreen.UserProfile"
+        android:label="@string/title_detail"
+        tools:layout="@layout/fragment_user_profile">
+        <deepLink
+            android:id="@+id/deepLink"
+            app:uri="www.example.com/user/{userName}"
+            android:autoVerify="true"/>
+        <argument
+            android:name="userName"
+            app:argType="string"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/register"
+        android:name="com.example.android.navigationadvancedsample.formscreen.Register"
+        android:label="@string/title_register"
+        tools:layout="@layout/fragment_register">
+        <action
+            android:id="@+id/action_register_to_registered"
+            app:destination="@id/registered"/>
+    </fragment>
+    <fragment
+        android:id="@+id/registered"
+        android:name="com.example.android.navigationadvancedsample.formscreen.Registered"
+        android:label="Registered"
+        tools:layout="@layout/fragment_registered"/>
 </navigation>
